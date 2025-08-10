@@ -5,6 +5,7 @@ resource "azurerm_storage_account" "st_function_app" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
   shared_access_key_enabled = false
+  default_to_oauth_authentication = true
 }
 
 resource "azurerm_storage_container" "sc_funtion_app" {
