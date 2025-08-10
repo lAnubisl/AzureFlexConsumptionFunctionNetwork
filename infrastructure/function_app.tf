@@ -28,7 +28,7 @@ resource "azurerm_function_app_flex_consumption" "func" {
   service_plan_id     = azurerm_service_plan.asp.id
 
   storage_container_type      = "blobContainer"
-  storage_container_endpoint  = "${azurerm_storage_account.st_function_app.primary_blob_endpoint}${azurerm_storage_container.st_function_app.name}"
+  storage_container_endpoint  = "${azurerm_storage_account.st_function_app.primary_blob_endpoint}${azurerm_storage_container.sc_funtion_app.name}"
   storage_authentication_type = "SystemAssignedIdentity"
   runtime_name                = "python"
   runtime_version             = "3.11"
