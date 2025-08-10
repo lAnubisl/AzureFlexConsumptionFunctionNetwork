@@ -32,7 +32,7 @@ resource "azurerm_function_app_flex_consumption" "func" {
   storage_authentication_type = "SystemAssignedIdentity"
   runtime_name                = "python"
   runtime_version             = "3.11"
-  maximum_instance_count      = 1
+  maximum_instance_count      = 40
   instance_memory_in_mb       = 512
   site_config {
     minimum_tls_version = "1.3"
