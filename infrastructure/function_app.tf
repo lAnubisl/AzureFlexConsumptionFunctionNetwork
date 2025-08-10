@@ -47,11 +47,11 @@ resource "azurerm_function_app_flex_consumption" "func" {
   }
 }
 
-resource "azurerm_role_assignment" "function_app_storage_container_role_assignment" {
-  scope                = azurerm_storage_container.sc_funtion_app.id
-  role_definition_name = "Storage Blob Data Contributor"
-  principal_id         = azurerm_function_app_flex_consumption.func.identity[0].principal_id
-}
+# resource "azurerm_role_assignment" "function_app_storage_container_role_assignment" {
+#   scope                = azurerm_storage_container.sc_funtion_app.id
+#   role_definition_name = "Storage Blob Data Contributor"
+#   principal_id         = azurerm_function_app_flex_consumption.func.identity[0].principal_id
+# }
 
 resource "azurerm_app_service_virtual_network_swift_connection" "vnet_webapp" {
   app_service_id = azurerm_function_app_flex_consumption.func.id
