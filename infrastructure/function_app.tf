@@ -43,9 +43,6 @@ resource "azurerm_function_app_flex_consumption" "func" {
     type = "SystemAssigned"
   }
   app_settings = {
-    # https://learn.microsoft.com/en-us/azure/azure-functions/functions-app-settings#python_enable_worker_extensions
-    PYTHON_ENABLE_WORKER_EXTENSIONS = "1"
-    FUNCTIONS_WORKER_RUNTIME        = "python"
     # https://learn.microsoft.com/en-us/troubleshoot/azure/azure-monitor/app-insights/telemetry/opentelemetry-troubleshooting-python#duplicate-trace-logs-in-azure-functions
     # ### Duplicate trace logs in Azure Functions ###
     # If you see a pair of entries for each trace log within Application Insights, you probably enabled the following types of logging instrumentation:
