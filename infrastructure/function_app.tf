@@ -53,6 +53,9 @@ resource "azurerm_function_app_flex_consumption" "func" {
     # https://learn.microsoft.com/en-us/azure/azure-monitor/app/opentelemetry-configuration?tabs=python#set-the-cloud-role-name-and-the-cloud-role-instance
     OTEL_SERVICE_NAME        = "MyFunctionApp"
     OTEL_RESOURCE_ATTRIBUTES = "service.instance.id=MyFunctionApp"
+
+    STORAGE_ACCOUNT_NAME   = azurerm_storage_account.st_metadata.name
+    STORAGE_CONTAINER_NAME = azurerm_storage_container.sc_funtion_app.name
   }
   lifecycle {
     ignore_changes = [
