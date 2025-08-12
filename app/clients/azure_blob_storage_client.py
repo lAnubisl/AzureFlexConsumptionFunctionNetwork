@@ -21,9 +21,9 @@ class AzureBlobStorageClient:
                 async with DefaultAzureCredential() as credential:
                     account_name = self.__config.get_storage_account_name()
                     account_url = f"https://{account_name}.blob.core.windows.net"
-                    with BlobServiceClient(account_url, credential=credential) as blob_service_client:
+                    async with BlobServiceClient(account_url, credential=credential) as blob_service_client:
                         container_name = self.__config.get_storage_container_name()
-                        with blob_service_client.get_container_client(container_name) as container_client:
+                        async with blob_service_client.get_container_client(container_name) as container_client:
                             blob_client: BlobClient = container_client.get_blob_client("text.txt")
                             downloader: StorageStreamDownloader[str] = await blob_client.download_blob(max_concurrency=1, encoding='UTF-8')
                             content: str = await downloader.readall()
