@@ -58,9 +58,9 @@ resource "azurerm_role_assignment" "ra_curr_sc_metadata" {
 
 resource "azurerm_storage_blob" "test_blob" {
   depends_on             = [azurerm_role_assignment.ra_curr_sc_metadata]
-  name                   = "test.txt"
+  name                   = "text.txt"
   storage_account_name   = azurerm_storage_account.st_metadata.name
   storage_container_name = azurerm_storage_container.sc_metadata.name
   type                   = "Block"
-  source                 = "${path.module}/test.txt"
+  source                 = "${path.module}/text.txt"
 }
