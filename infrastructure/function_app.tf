@@ -4,8 +4,8 @@ resource "azurerm_storage_account" "st_function_app" {
   location                        = azurerm_resource_group.rg.location
   account_tier                    = "Standard"
   account_replication_type        = "LRS"
-  shared_access_key_enabled       = false
-  default_to_oauth_authentication = true
+  shared_access_key_enabled       = true
+  default_to_oauth_authentication = false
 }
 
 resource "azurerm_storage_container" "sc_funtion_app" {
