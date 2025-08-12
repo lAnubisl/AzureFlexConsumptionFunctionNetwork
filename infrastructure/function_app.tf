@@ -55,7 +55,13 @@ resource "azurerm_function_app_flex_consumption" "func" {
     OTEL_RESOURCE_ATTRIBUTES = "service.instance.id=MyFunctionApp"
 
     STORAGE_ACCOUNT_NAME   = azurerm_storage_account.st_metadata.name
-    STORAGE_CONTAINER_NAME = azurerm_storage_container.sc_funtion_app.name
+    STORAGE_CONTAINER_NAME = azurerm_storage_container.sc_metadata.name
+
+    # https://github.com/hashicorp/terraform-provider-azurerm/issues/29993
+    AzureWebJobsStorage__blobServiceUri  = azurerm_storage_account.st_function_app.primary_blob_endpoint
+    AzureWebJobsStorage__queueServiceUri = azurerm_storage_account.st_function_app.primary_queue_endpoint
+    AzureWebJobsStorage__tableServiceUri = azurerm_storage_account.st_function_app.primary_table_endpoint
+    AzureWebJobsStorage__fileServiceUri  = azurerm_storage_account.st_function_app.primary_file_endpoint
   }
   lifecycle {
     ignore_changes = [
