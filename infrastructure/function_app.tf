@@ -30,7 +30,8 @@ resource "azurerm_function_app_flex_consumption" "func" {
 
   storage_container_type      = "blobContainer"
   storage_container_endpoint  = "${azurerm_storage_account.st_function_app.primary_blob_endpoint}${azurerm_storage_container.sc_funtion_app.name}"
-  storage_authentication_type = "SystemAssignedIdentity"
+  storage_authentication_type = "StorageAccountConnectionString"
+  storage_access_key          = azurerm_storage_account.st_function_app.primary_access_key
   runtime_name                = "python"
   runtime_version             = "3.11"
   maximum_instance_count      = 40
@@ -58,10 +59,10 @@ resource "azurerm_function_app_flex_consumption" "func" {
     STORAGE_CONTAINER_NAME = azurerm_storage_container.sc_metadata.name
 
     # https://github.com/hashicorp/terraform-provider-azurerm/issues/29993
-    AzureWebJobsStorage__blobServiceUri  = azurerm_storage_account.st_function_app.primary_blob_endpoint
-    AzureWebJobsStorage__queueServiceUri = azurerm_storage_account.st_function_app.primary_queue_endpoint
-    AzureWebJobsStorage__tableServiceUri = azurerm_storage_account.st_function_app.primary_table_endpoint
-    AzureWebJobsStorage__fileServiceUri  = azurerm_storage_account.st_function_app.primary_file_endpoint
+    # AzureWebJobsStorage__blobServiceUri  = azurerm_storage_account.st_function_app.primary_blob_endpoint
+    # AzureWebJobsStorage__queueServiceUri = azurerm_storage_account.st_function_app.primary_queue_endpoint
+    # AzureWebJobsStorage__tableServiceUri = azurerm_storage_account.st_function_app.primary_table_endpoint
+    # AzureWebJobsStorage__fileServiceUri  = azurerm_storage_account.st_function_app.primary_file_endpoint
   }
   lifecycle {
     ignore_changes = [
