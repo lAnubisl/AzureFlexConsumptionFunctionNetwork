@@ -1,16 +1,16 @@
 resource "azurerm_storage_account" "st_metadata" {
-  name                             = "stmetadata${random_string.random.result}"
-  resource_group_name              = azurerm_resource_group.rg.name
-  location                         = azurerm_resource_group.rg.location
-  account_tier                     = "Standard"
-  account_replication_type         = "LRS"
-  allow_nested_items_to_be_public  = false
-  default_to_oauth_authentication  = true
-  shared_access_key_enabled        = false
-  public_network_access_enabled    = true
-  is_hns_enabled                   = false
-  access_tier                      = "Hot"
-  min_tls_version                  = "TLS1_2"
+  name                            = "stmetadata${random_string.random.result}"
+  resource_group_name             = azurerm_resource_group.rg.name
+  location                        = azurerm_resource_group.rg.location
+  account_tier                    = "Standard"
+  account_replication_type        = "LRS"
+  allow_nested_items_to_be_public = false
+  default_to_oauth_authentication = true
+  shared_access_key_enabled       = false
+  public_network_access_enabled   = true
+  is_hns_enabled                  = false
+  access_tier                     = "Hot"
+  min_tls_version                 = "TLS1_2"
 }
 
 resource "azurerm_storage_container" "sc_metadata" {
@@ -48,4 +48,12 @@ resource "azurerm_private_endpoint" "private_endpoint_st_metadata" {
     name                 = "default"
     private_dns_zone_ids = [azurerm_private_dns_zone.privatelink_dfs_core_windows_net.id]
   }
+}
+
+resource "azurerm_storage_blob" "test_blob" {
+  name                   = "test.txt"
+  storage_account_name   = azurerm_storage_account.st_metadata.name
+  storage_container_name = azurerm_storage_container.sc_metadata.name
+  type                   = "Block"
+  source                 = "test.txt"
 }
