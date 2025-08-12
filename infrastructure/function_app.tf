@@ -64,8 +64,8 @@ resource "azurerm_function_app_flex_consumption" "func" {
   }
 }
 
-resource "azurerm_role_assignment" "ra_func_sc" {
-  scope                = azurerm_storage_container.sc_funtion_app.id
+resource "azurerm_role_assignment" "ra_func_st" {
+  scope                = azurerm_storage_account.st_function_app.id
   role_definition_name = "Storage Blob Data Contributor"
   principal_id         = azurerm_function_app_flex_consumption.func.identity[0].principal_id
 }
