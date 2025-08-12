@@ -19,16 +19,16 @@ resource "azurerm_storage_container" "sc_metadata" {
   container_access_type = "private"
 }
 
-resource "azurerm_private_dns_zone" "privatelink_dfs_core_windows_net" {
-  name                = "privatelink.dfs.core.windows.net"
+resource "azurerm_private_dns_zone" "privatelink_blob_core_windows_net" {
+  name                = "privatelink.blob.core.windows.net"
   resource_group_name = azurerm_resource_group.rg.name
 }
 
-resource "azurerm_private_dns_zone_virtual_network_link" "vnet_privatelink_dfs_azure_com" {
+resource "azurerm_private_dns_zone_virtual_network_link" "vnet_privatelink_blob_azure_com" {
   name                  = azurerm_virtual_network.vnet.name
   virtual_network_id    = azurerm_virtual_network.vnet.id
   resource_group_name   = azurerm_resource_group.rg.name
-  private_dns_zone_name = azurerm_private_dns_zone.privatelink_dfs_core_windows_net.name
+  private_dns_zone_name = azurerm_private_dns_zone.privatelink_blob_core_windows_net.name
 }
 
 resource "azurerm_private_endpoint" "private_endpoint_st_metadata" {
@@ -40,13 +40,13 @@ resource "azurerm_private_endpoint" "private_endpoint_st_metadata" {
   private_service_connection {
     name                           = "pe-conn-${azurerm_storage_account.st_metadata.name}"
     private_connection_resource_id = azurerm_storage_account.st_metadata.id
-    subresource_names              = ["dfs"]
+    subresource_names              = ["blob"]
     is_manual_connection           = false
   }
 
   private_dns_zone_group {
     name                 = "default"
-    private_dns_zone_ids = [azurerm_private_dns_zone.privatelink_dfs_core_windows_net.id]
+    private_dns_zone_ids = [azurerm_private_dns_zone.privatelink_blob_core_windows_net.id]
   }
 }
 
