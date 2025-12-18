@@ -9,4 +9,31 @@ updates:
  - package-ecosystem: "devcontainers"
    directory: "/"
    schedule:
-     interval: weekly
+     interval: "monthly"
+   labels:
+   - "dependencies"
+   - "devcontainers"
+    
+ - package-ecosystem: "pip"
+   directory: "/app"
+   schedule:
+     interval: "monthly"
+   labels:
+   - "dependencies"
+   - "python"
+
+ - package-ecosystem: "terraform"
+   directory: "/infrastructure"
+   schedule:
+     interval: "monthly"
+   labels:
+    - "dependencies"
+    - "terraform"
+
+ - package-ecosystem: "github-actions"
+   directory: "/"
+   schedule:
+     interval: "monthly"
+   labels:
+   - "dependencies"
+   - "github-actions"
