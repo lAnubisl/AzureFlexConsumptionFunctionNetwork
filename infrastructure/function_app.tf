@@ -33,7 +33,7 @@ resource "azurerm_function_app_flex_consumption" "func" {
   storage_authentication_type = "StorageAccountConnectionString"
   storage_access_key          = azurerm_storage_account.st_function_app.primary_access_key
   runtime_name                = "python"
-  runtime_version             = "3.11"
+  runtime_version             = "3.13"
   maximum_instance_count      = 40
   instance_memory_in_mb       = 512
   site_config {
