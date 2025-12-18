@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "st_function_app" {
-  name                            = "stfunc${random_string.random.result}"
+  name                            = local.storage_function_name
   resource_group_name             = azurerm_resource_group.rg.name
   location                        = azurerm_resource_group.rg.location
   account_tier                    = "Standard"
@@ -15,7 +15,7 @@ resource "azurerm_storage_container" "sc_funtion_app" {
 }
 
 resource "azurerm_service_plan" "asp" {
-  name                = "app-service-plan-${random_string.random.result}"
+  name                = local.service_plan_name
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   sku_name            = "FC1"
@@ -23,7 +23,7 @@ resource "azurerm_service_plan" "asp" {
 }
 
 resource "azurerm_function_app_flex_consumption" "func" {
-  name                = "func-${random_string.random.result}"
+  name                = local.function_app_name
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   service_plan_id     = azurerm_service_plan.asp.id
