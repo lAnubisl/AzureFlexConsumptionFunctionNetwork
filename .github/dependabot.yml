@@ -1,8 +1,7 @@
 # To get started with Dependabot version updates, you'll need to specify which
 # package ecosystems to update and where the package manifests are located.
-# Please see the documentation for more information:
+# Please see the documentation for all configuration options:
 # https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
-# https://containers.dev/guide/dependabot
 
 version: 2
 updates:
@@ -14,46 +13,46 @@ updates:
      - "dependencies"
      - "devcontainers"
    open-pull-requests-limit: 1
-     groups:
-       all-dependencies:
-         patterns:
-           - "*"
-    
- - package-ecosystem: "pip"
-   directory: "/app"
-   schedule:
-     interval: "monthly"
-   labels:
-     - "dependencies"
-     - "python"
-   open-pull-requests-limit: 1
-     groups:
-       all-dependencies:
-         patterns:
-           - "*"
+   groups:
+     all-dependencies:
+       patterns:
+         - "*"
 
- - package-ecosystem: "terraform"
-   directory: "/infrastructure"
-   schedule:
-     interval: "monthly"
-   labels:
-     - "dependencies"
-     - "terraform"
-   open-pull-requests-limit: 1
-     groups:
-       all-dependencies:
-         patterns:
-           - "*"
+  - package-ecosystem: "nuget"
+    directory: "/src/backend" # Location of package manifests
+    schedule:
+      interval: "monthly"
+    labels:
+      - "dependencies"
+      - "nuget"
+    open-pull-requests-limit: 1
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
 
- - package-ecosystem: "github-actions"
-   directory: "/"
-   schedule:
-     interval: "monthly"
-   labels:
-     - "dependencies"
-     - "github-actions"
-   open-pull-requests-limit: 1
-     groups:
-       all-dependencies:
-         patterns:
-           - "*"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    open-pull-requests-limit: 1
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
+
+  - package-ecosystem: "terraform"
+    directory: "/src/infrastructure"
+    schedule:
+      interval: "monthly"
+    labels:
+      - "dependencies"
+      - "terraform"
+    open-pull-requests-limit: 1
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
